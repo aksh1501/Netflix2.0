@@ -10,7 +10,7 @@ export function entirePage(objectFromJson)
 
   const showData=objectFromJson['shows'];
 
-  function GetMovieInfo(api,id,cache,e)
+  function GetMovieInfo(api,id,cache,e,callback)
   {
     let url='http://www.omdbapi.com/?apikey='+api+'&i='+id;
   
@@ -37,9 +37,8 @@ export function entirePage(objectFromJson)
           // Examine the text in the response
             response.json().then(function(data) {
             // console.log(id,data);
-            // console.log(cache);
             cache[id]=data;
-            renderInfoPage(id,e);
+            callback(id,e);
             return;
           });
         }
@@ -66,13 +65,11 @@ export function entirePage(objectFromJson)
   function handleClick(e)
   {
     // const imdbId=arguments[0]["target"].getElementsByTagName('h5')[0].innerText;
-    
     // console.log(e.target);
 
     const imdbId=e.target.getAttribute('data-movie-id');
 
-    GetMovieInfo(ApiKey ,imdbId, movieDetails,e);
-
+    GetMovieInfo(ApiKey ,imdbId, movieDetails,e,renderInfoPage);
   }
 
   function renderInfoPage(imdbId,e)
