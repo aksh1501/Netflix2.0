@@ -9,7 +9,7 @@ export function entirePage(objectFromJson)
   let searchKey=document.getElementsByClassName("my-input")[0]
 
   const showData=objectFromJson['shows'];
-
+  
   function GetMovieInfo(api,id,cache,e,callback)
   {
     let url='http://www.omdbapi.com/?apikey='+api+'&i='+id;
@@ -17,7 +17,7 @@ export function entirePage(objectFromJson)
     if(cache[id])
     {
       console.log("faster");
-      renderInfoPage(id,e);
+      callback(id,e);
       return;
     }
 
@@ -74,7 +74,6 @@ export function entirePage(objectFromJson)
 
   function renderInfoPage(imdbId,e)
   {
-
     const showTitle=movieDetails[imdbId]['Title'];  
      
     const releaseDate=movieDetails[imdbId]['Released']
