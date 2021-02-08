@@ -70,8 +70,6 @@ export function entirePage(objectFromJson)
     // console.log(e.target);
 
     const imdbId=e.target.getAttribute('data-movie-id');
-    
-    // console.log(e.target);
 
     GetMovieInfo(ApiKey ,imdbId, movieDetails,e);
 
@@ -79,7 +77,6 @@ export function entirePage(objectFromJson)
 
   function renderInfoPage(imdbId,e)
   {
-    // console.log(movieDetails);
 
     const showTitle=movieDetails[imdbId]['Title'];  
      
@@ -129,8 +126,6 @@ export function entirePage(objectFromJson)
   </ul>`;
 
   const movieBlock=document.getElementsByClassName("flex-container")[0];
-
-  // console.log(movieBlock);
 
   movieBlock.addEventListener('click',handleClick);
 
