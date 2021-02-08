@@ -1,4 +1,4 @@
-import {entirePage,createMapping} from './entirePageStructure.js';
+import {entirePage} from './entirePageStructure.js';
 
 fetch('https://demo0376970.mockable.io/movieslist',{
     method: "GET"
@@ -14,7 +14,7 @@ fetch('https://demo0376970.mockable.io/movieslist',{
       // Examine the text in the response
       response.json().then(function(data) {
         entirePage(data);
-        createMapping(data);
+        //createMapping(data);
       });
     }
   )

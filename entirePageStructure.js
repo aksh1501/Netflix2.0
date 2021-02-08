@@ -1,8 +1,8 @@
 import {debounce,searchImplementation} from './debounceSearchImpl.js';
-import {GetMovieInfo} from "./movieData.js";
 
-export const ApiKey="109daa35";
-export let movieDetails=new Map();
+const ApiKey="109daa35";
+
+let movieDetails={};
 
 export function entirePage(objectFromJson)
 {
@@ -10,34 +10,86 @@ export function entirePage(objectFromJson)
 
   const showData=objectFromJson['shows'];
 
+  function GetMovieInfo(api,id,cache,e)
+  {
+    let url='http://www.omdbapi.com/?apikey='+api+'&i='+id;
+  
+    if(cache[id])
+    {
+      console.log("faster");
+      renderInfoPage(id,e);
+      return;
+    }
+
+    // console.log(movieDetails);
+  
+    fetch(url,{
+      method: "GET"
+    })
+      .then(
+        function(response) {
+          if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' +
+              response.status);
+            return;
+          }
+  
+          // Examine the text in the response
+            response.json().then(function(data) {
+            // console.log(id,data);
+            // console.log(cache);
+            cache[id]=data;
+            renderInfoPage(id,e);
+            return;
+          });
+        }
+      )
+      .catch(function(err) {
+        console.log("idk");
+        console.log('Fetch Error :-S', err);
+      });
+    }
+
   function showTemplate(show) 
   {
       return `<li class="flex-item">
-            <article class="showContent">
+            <article class="showContent" data-movie-id=${show.imdbID} data-trailer=${show.trailer} data-image-path="./img/posters/${show.poster}">
             <img class="showImage" src="./img/posters/${show.poster}">
             <h3 class="showTitle">${show.title}</h3>
             <h4 class="releaseYear">(${show.year} )</h4>
-            <h5 class="noShow">${show.imdbID}</h4>
-            <h6 class="noShow">${show.trailer}</h4>
             <p class="showDescription">${show.description}</p>
             </article>
         </li>`;
 
   }
 
-  function handleClick()
+  function handleClick(e)
   {
-    const imdbId=arguments[0]["target"].getElementsByTagName('h5')[0].innerText;
+    // const imdbId=arguments[0]["target"].getElementsByTagName('h5')[0].innerText;
     
+    // console.log(e.target);
+
+    const imdbId=e.target.getAttribute('data-movie-id');
+    
+    // console.log(e.target);
+
+    GetMovieInfo(ApiKey ,imdbId, movieDetails,e);
+
+  }
+
+  function renderInfoPage(imdbId,e)
+  {
+    // console.log(movieDetails);
+
     const showTitle=movieDetails[imdbId]['Title'];  
      
     const releaseDate=movieDetails[imdbId]['Released']
      
     const description=movieDetails[imdbId]['Plot'];  
     
-    const imagePath=arguments[0]["target"].getElementsByTagName('img')[0].src;
-    
-    const trailer=arguments[0]["target"].getElementsByTagName('h6')[0].innerText;
+    const imagePath=e.target.dataset.imagePath;
+   
+    const trailer=e.target.dataset.trailer;
 
     const trailerUrl="https://www.youtube-nocookie.com/embed/"+trailer;
 
@@ -59,8 +111,15 @@ export function entirePage(objectFromJson)
       </li>
       <li>${description}</li>
     </div>
-    <p align="center"><iframe class="trailerVideo" src=${trailerUrl}></iframe></p>`;
-  
+    <p align="center"><iframe class="trailerVideo" src=${trailerUrl}></iframe>
+    <button type="button" class="backButton">back</button></p>`;
+
+
+    document.getElementsByClassName('backButton')[0].addEventListener('click',()=>{
+      searchKey.classList.remove("noShow");
+      pageView.classList.remove("noShow");
+      entirePage(objectFromJson);
+    });
   }
 
 
@@ -69,12 +128,11 @@ export function entirePage(objectFromJson)
   ${showData.map(showTemplate).join("")}
   </ul>`;
 
-  const movieBlock=document.querySelectorAll(".flex-item");
+  const movieBlock=document.getElementsByClassName("flex-container")[0];
 
-  movieBlock.forEach((blk)=>{
-    blk.removeEventListener('click',handleClick);
-    blk.addEventListener('click',handleClick);
-  });
+  // console.log(movieBlock);
+
+  movieBlock.addEventListener('click',handleClick);
 
   let debouncedSearch=debounce(searchImplementation,700);
 
@@ -89,10 +147,3 @@ export function entirePage(objectFromJson)
 }
 
 
-export function createMapping(data){
-    const allShows=data["shows"];
-      allShows.forEach((show)=>{
-      GetMovieInfo(ApiKey ,show['imdbID'],movieDetails);
-    });
-    
-  }
