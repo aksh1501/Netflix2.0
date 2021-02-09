@@ -1,3 +1,4 @@
+
 export let searchImplementation=function(){
     let inputText, filteredText, ulElementData, liElementData, idx, aElementData, eachShowTitle;
 
@@ -24,6 +25,7 @@ export function debounce(func, wait) {
     let timeout;
     return function debounced() { 
         var context = this;
+        console.log(this);
         var args = arguments;
   
         function later() {
@@ -32,6 +34,7 @@ export function debounce(func, wait) {
         if (timeout) {
           clearInterval(timeout);
         }
+
         timeout = setTimeout(later, wait);
     }
   }

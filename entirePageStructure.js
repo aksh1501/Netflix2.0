@@ -1,11 +1,11 @@
 import {debounce,searchImplementation} from './debounceSearchImpl.js';
 
-const ApiKey="109daa35";
-
-let movieDetails={};
-
 export function entirePage(objectFromJson)
 {
+  let movieDetails={};
+
+  const ApiKey="109daa35";
+
   let searchKey=document.getElementsByClassName("my-input")[0]
 
   const showData=objectFromJson['shows'];
@@ -44,7 +44,6 @@ export function entirePage(objectFromJson)
         }
       )
       .catch(function(err) {
-        console.log("idk");
         console.log('Fetch Error :-S', err);
       });
     }
@@ -64,9 +63,6 @@ export function entirePage(objectFromJson)
 
   function handleClick(e)
   {
-    // const imdbId=arguments[0]["target"].getElementsByTagName('h5')[0].innerText;
-    // console.log(e.target);
-
     const imdbId=e.target.getAttribute('data-movie-id');
 
     GetMovieInfo(ApiKey ,imdbId, movieDetails,e,renderInfoPage);
@@ -111,23 +107,25 @@ export function entirePage(objectFromJson)
     document.getElementsByClassName('backButton')[0].addEventListener('click',()=>{
       searchKey.classList.remove("noShow");
       pageView.classList.remove("noShow");
-      entirePage(objectFromJson);
+      // entirePage(objectFromJson);
+      firstPage();
     });
   }
 
 
-  //adding a better naming for the id of search element
-  document.getElementById("entireContent").innerHTML=`<ul id="myul" class="flex-container">
-  ${showData.map(showTemplate).join("")}
-  </ul>`;
+  function firstPage()
+  {
+    document.getElementById("entireContent").innerHTML=`<ul id="myul" class="flex-container">
+    ${showData.map(showTemplate).join("")}
+    </ul>`;
 
-  const movieBlock=document.getElementsByClassName("flex-container")[0];
+    const movieBlock=document.getElementsByClassName("flex-container")[0];
 
-  movieBlock.addEventListener('click',handleClick);
+    movieBlock.addEventListener('click',handleClick);
 
-  let debouncedSearch=debounce(searchImplementation,700);
+    let debouncedSearch=debounce(searchImplementation,700);
 
-  searchKey.oninput=() => {
+    searchKey.oninput=() => {
       let textEntered=searchKey.value;
         
       if(textEntered!=='' && textEntered.length>=2)
@@ -135,6 +133,8 @@ export function entirePage(objectFromJson)
           debouncedSearch();
       }
     }
-}
+  }
 
+  firstPage();
+}
 
