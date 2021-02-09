@@ -10,11 +10,11 @@ export function entirePage(objectFromJson)
 
   const showData=objectFromJson['shows'];
   
-  function GetMovieInfo(api,id,cache,e,callback)
+  function GetMovieInfo(id,e,callback)
   {
-    let url='http://www.omdbapi.com/?apikey='+api+'&i='+id;
+    let url='http://www.omdbapi.com/?apikey='+ApiKey+'&i='+id;
   
-    if(cache[id])
+    if(movieDetails[id])
     {
       console.log("faster");
       callback(id,e);
@@ -36,8 +36,7 @@ export function entirePage(objectFromJson)
   
           // Examine the text in the response
             response.json().then(function(data) {
-            // console.log(id,data);
-            cache[id]=data;
+            movieDetails[id]=data;
             callback(id,e);
             return;
           });
@@ -65,24 +64,26 @@ export function entirePage(objectFromJson)
   {
     const imdbId=e.target.getAttribute('data-movie-id');
 
-    GetMovieInfo(ApiKey ,imdbId, movieDetails,e,renderInfoPage);
+    GetMovieInfo(imdbId, e,renderInfoPage);
   }
 
   function renderInfoPage(imdbId,e)
   {
-    const showTitle=movieDetails[imdbId]['Title'];  
+    const currMovie=movieDetails[imdbId];
+
+    const showTitle=currMovie['Title'];  
      
-    const releaseDate=movieDetails[imdbId]['Released']
+    const releaseDate=currMovie['Released']
      
-    const description=movieDetails[imdbId]['Plot'];  
+    const description=currMovie['Plot'];  
+
+    const rating=currMovie['Ratings'][0].Value;
     
     const imagePath=e.target.dataset.imagePath;
    
     const trailer=e.target.dataset.trailer;
 
     const trailerUrl="https://www.youtube-nocookie.com/embed/"+trailer;
-
-    const rating=movieDetails[imdbId]['Ratings'][0].Value;
 
     const pageView=document.getElementsByClassName("flex-container")[0];
    
@@ -125,14 +126,14 @@ export function entirePage(objectFromJson)
 
     let debouncedSearch=debounce(searchImplementation,700);
 
-    searchKey.oninput=() => {
-      let textEntered=searchKey.value;
+    searchKey.addEventListener('input',() => {
+      const textEntered=searchKey.value;
         
       if(textEntered!=='' && textEntered.length>=2)
       {
           debouncedSearch();
       }
-    }
+    });
   }
 
   firstPage();
