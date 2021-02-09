@@ -12,14 +12,14 @@ export function entirePage(objectFromJson)
 
   const showData=objectFromJson['shows'];
   
-  function getMovieInfo(id,elem)
+  function getMovieInfo(id,trailer)
     {
       let url='http://www.omdbapi.com/?apikey='+ApiKey+'&i='+id;
   
       if(movieDetails[id])
       {
         console.log("faster");
-        renderInfoPage(id,elem);
+        renderInfoPage(id,trailer);
         return;
       }
   
@@ -37,7 +37,7 @@ export function entirePage(objectFromJson)
           // Examine the text in the response
             response.json().then(function(data) {
             movieDetails[id]=data;
-            renderInfoPage(id,elem);
+            renderInfoPage(id,trailer);
             return;
           });
         }
@@ -49,8 +49,8 @@ export function entirePage(objectFromJson)
 
   function showTemplate(show) 
   {
-      return `<li class="flex-item">
-            <article class="showContent" data-movie-id=${show.imdbID} data-trailer=${show.trailer} data-image-path="./img/posters/${show.poster}">
+      return `<li class="flex-item" data-movie-id=${show.imdbID} data-trailer=${show.trailer} >
+            <article class="showContent">
             <img class="showImage" src="./img/posters/${show.poster}">
             <h3 class="showTitle">${show.title}</h3>
             <h4 class="releaseYear">(${show.year} )</h4>
@@ -62,12 +62,16 @@ export function entirePage(objectFromJson)
 
   function handleClick(e)
   {
-    const imdbId=e.target.getAttribute('data-movie-id');
+    const li=e.target.closest(".flex-item");
 
-    getMovieInfo(imdbId, e);
+    const imdbId=li.getAttribute('data-movie-id');
+
+    const trailer=li.getAttribute('data-trailer');
+
+    getMovieInfo(imdbId, trailer);
   }
 
-  function renderInfoPage(imdbId,e)
+  function renderInfoPage(imdbId,trailer)
   {
     const currMovie=movieDetails[imdbId];
 
@@ -79,10 +83,8 @@ export function entirePage(objectFromJson)
 
     const rating=currMovie['Ratings'][0].Value;
     
-    const imagePath=e.target.dataset.imagePath;
+    const imagePath=currMovie['Poster'];
    
-    const trailer=e.target.dataset.trailer;
-
     const trailerUrl="https://www.youtube-nocookie.com/embed/"+trailer;
 
     const pageView=document.getElementsByClassName("movie-list-container")[0];

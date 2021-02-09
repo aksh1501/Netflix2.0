@@ -20,14 +20,12 @@ body{
 
 
 .main-header{
-    width: 1400px;
     border-bottom: 2px solid #000;
     margin-bottom: 2px;
     background-color: #eacaee;
 }
 
 .top-stories{
-    width: 1400px;
     background-color: #f8e7f5;
     opacity: 0.85; 
     position: absolute;
@@ -39,10 +37,9 @@ body{
     height:400px
 }
 
-.showContent:hover{
+.showContent:hover
+{
     background-color: rgb(172, 172, 240);
-    height:415px;
-    width: 436px;
 }
 
 .showImage{
@@ -62,7 +59,6 @@ body{
 
 .flex-item
 {
-    width: 401px;
     height:400px;
     text-align: center;
     margin-bottom: 20px;
@@ -103,7 +99,6 @@ body{
     width:300px;
     height:30px;
     margin-bottom: 5px;
-    /* margin-bottom: 2px; */
 }
 
 .noShow{
@@ -112,7 +107,6 @@ body{
 
 .moviePage{
     list-style-type: none;
-    /* text-align: top; */
     margin: 0;
     padding: 0;
 }
