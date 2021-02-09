@@ -3,7 +3,6 @@ export let searchImplementation=function(){
     let inputText, filteredText, ulElementData, liElementData, idx, aElementData, eachShowTitle;
 
         inputText = document.getElementsByClassName("my-input")[0];
-        // console.log(input);
         filteredText = inputText.value.toUpperCase();
         ulElementData = document.getElementById("myul");
         liElementData = ulElementData.getElementsByTagName("li");
@@ -23,14 +22,15 @@ export let searchImplementation=function(){
 
 export function debounce(func, wait) {
     let timeout;
-    return function debounced() { 
-        var context = this;
+    return function debounced() {  
+        let context = this;
         console.log(this);
-        var args = arguments;
+        let args = arguments;
   
         function later() {
           func.apply(context, args);
         }
+
         if (timeout) {
           clearInterval(timeout);
         }

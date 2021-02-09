@@ -12,18 +12,16 @@ export function entirePage(objectFromJson)
 
   const showData=objectFromJson['shows'];
   
-  function GetMovieInfo(id,e,callback)
+  function getMovieInfo(id,elem)
     {
       let url='http://www.omdbapi.com/?apikey='+ApiKey+'&i='+id;
   
       if(movieDetails[id])
       {
         console.log("faster");
-        callback(id,e);
+        renderInfoPage(id,elem);
         return;
       }
-
-
   
       fetch(url,{
         method: "GET"
@@ -39,13 +37,13 @@ export function entirePage(objectFromJson)
           // Examine the text in the response
             response.json().then(function(data) {
             movieDetails[id]=data;
-            callback(id,e);
+            renderInfoPage(id,elem);
             return;
           });
         }
       )
       .catch(function(err) {
-        console.log('Fetch Error :-S', err);
+        console.log('Fetch Error :', err);
       });
   }
 
@@ -66,7 +64,7 @@ export function entirePage(objectFromJson)
   {
     const imdbId=e.target.getAttribute('data-movie-id');
 
-    GetMovieInfo(imdbId, e,renderInfoPage);
+    getMovieInfo(imdbId, e);
   }
 
   function renderInfoPage(imdbId,e)
@@ -87,7 +85,7 @@ export function entirePage(objectFromJson)
 
     const trailerUrl="https://www.youtube-nocookie.com/embed/"+trailer;
 
-    const pageView=document.getElementsByClassName("flex-container")[0];
+    const pageView=document.getElementsByClassName("movie-list-container")[0];
    
     pageView.classList.add("noShow");
 
@@ -118,7 +116,7 @@ export function entirePage(objectFromJson)
 
   function firstPage()
   {
-    content.innerHTML=`<ul id="myul" class="movie-list-container flex-container">
+    content.innerHTML=`<ul id="myul" class="movie-list-container">
     ${showData.map(showTemplate).join("")}
     </ul>`;
 
@@ -139,5 +137,6 @@ export function entirePage(objectFromJson)
   }
 
   firstPage();
+
 }
 

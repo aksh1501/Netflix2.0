@@ -39,6 +39,12 @@ body{
     height:400px
 }
 
+.showContent:hover{
+    background-color: rgb(172, 172, 240);
+    height:415px;
+    width: 436px;
+}
+
 .showImage{
     float:left;
     width: 220px;
@@ -47,22 +53,26 @@ body{
 } 
 
 
-.flex-container{
+.movie-list-container{
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     list-style : none;
 }
 
-.flex-item{
+.flex-item
+{
     width: 401px;
     height:400px;
     text-align: center;
     margin-bottom: 20px;
     margin-top: 5px;
+    cursor: pointer;
 }
 
-.site-title{
+
+.site-title
+{
     font-family: "Oswald", sans-serif;
     font-weight: 300;
     display: inline;
