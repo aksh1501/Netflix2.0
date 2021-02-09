@@ -1,160 +1,151 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto+Condensed:ital,wght@1,700&display=swap');
-
-
-body{      
+body {
     text-align: left;
-    
 }
 
-.showTitle{
-    font-family: "OSWALD&&Roboto Condensed",sans-serif;
-    text-align:left;
-    margin:2px;
+.showTitle {
+    font-family: "OSWALD&&Roboto Condensed", sans-serif;
+    text-align: left;
+    margin: 2px;
 }
 
-.releaseYear{
-    text-align:left;
+.releaseYear {
+    text-align: left;
     margin: 10px;
 }
 
-
-.main-header{
+.main-header {
     border-bottom: 2px solid #000;
     margin-bottom: 2px;
     background-color: #eacaee;
 }
 
-.top-stories{
+.top-stories {
     background-color: #f8e7f5;
-    opacity: 0.85; 
+    opacity: 0.85;
     position: absolute;
 }
 
-.showContent{
+.showContent {
     width: 421px;
     border: 2px solid #000;
-    height:400px
+    height: 400px
 }
 
-.showContent:hover
-{
+.showContent:hover {
     background-color: rgb(172, 172, 240);
 }
 
-.showImage{
-    float:left;
+.showImage {
+    float: left;
     width: 220px;
     height: 380px;
-    margin:2px;
-} 
+    margin: 2px;
+}
 
-
-.movie-list-container{
+.movie-list-container {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    list-style : none;
+    list-style: none;
 }
 
-.flex-item
-{
-    height:400px;
+.flex-item {
+    height: 400px;
     text-align: center;
     margin-bottom: 20px;
     margin-top: 5px;
     cursor: pointer;
 }
 
-
-.site-title
-{
+.site-title {
     font-family: "Oswald", sans-serif;
     font-weight: 300;
     display: inline;
     text-align: left;
-    color:rgb(206, 9, 224);
+    color: rgb(206, 9, 224);
 }
 
-.showDescription{
+.showDescription {
     text-align: left;
 }
 
-.background-image{
-    position:fixed; 
+.background-image {
+    position: fixed;
     left: 0;
     right: 0;
-    display:inline-block;
+    display: inline-block;
     background-image: url('./img/3.jpg');
     width: 100%;
-    height:100%;
+    height: 100%;
     filter: blur(4px);
-    background-position:center !important;
+    background-position: center !important;
     background-size: cover !important;
     z-index: -2;
 }
 
-.my-input{
+.my-input {
     margin-left: 1000px;
-    width:300px;
-    height:30px;
+    width: 300px;
+    height: 30px;
     margin-bottom: 5px;
 }
 
-.noShow{
+.noShow {
     display: none;
 }
 
-.moviePage{
+.moviePage {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.moviePage li{
-    font-family: "OSWALD&&Roboto Condensed",sans-serif;
+.moviePage li {
+    font-family: "OSWALD&&Roboto Condensed", sans-serif;
     display: inline-block;
     word-wrap: break-word;
-    max-width:500px;
-    margin:10px;
+    max-width: 500px;
+    margin: 10px;
 }
 
-.titlePageHead{
+.titlePageHead {
     font-size: 3rem;
     text-align: top;
-    margin-right:0px;
+    margin-right: 0px;
     word-wrap: break-word;
     width: 300px;
 }
 
-.titleImage{
+.titleImage {
     width: 220px;
     height: 380px;
-    margin:2px;
+    margin: 2px;
     vertical-align: middle;
 }
 
-.releaseDate{
+.releaseDate {
     font-size: 2em;
-    width:150px;
+    width: 150px;
 }
 
-.rating{
+.rating {
     font-size: 2em;
     width: 100px;
     padding: 2px;
 }
 
-.trailerVideo{
-    width:1200px;
-    height:800px;
-    z-index:2;
+.trailerVideo {
+    width: 1200px;
+    height: 800px;
+    z-index: 2;
 }
 
-.backButton{
+.backButton {
     display: block;
-    width:50px;
-    height:40px;
+    width: 50px;
+    height: 40px;
     align-content: center;
     justify-content: center;
 }
