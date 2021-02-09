@@ -13,24 +13,20 @@ body{
     margin:2px;
 }
 
-.releaseYear
-{
+.releaseYear{
     text-align:left;
     margin: 10px;
 }
 
 
-
-.main-header
-{
+.main-header{
     width: 1400px;
     border-bottom: 2px solid #000;
     margin-bottom: 2px;
     background-color: #eacaee;
 }
 
-.top-stories
-{
+.top-stories{
     width: 1400px;
     background-color: #f8e7f5;
     opacity: 0.85; 
@@ -43,8 +39,7 @@ body{
     height:400px
 }
 
-.showImage
-{
+.showImage{
     float:left;
     width: 220px;
     height: 380px;
@@ -52,16 +47,14 @@ body{
 } 
 
 
-.flex-container
-{
+.flex-container{
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     list-style : none;
 }
 
-.flex-item
-{
+.flex-item{
     width: 401px;
     height:400px;
     text-align: center;
@@ -69,8 +62,7 @@ body{
     margin-top: 5px;
 }
 
-.site-title
-{
+.site-title{
     font-family: "Oswald", sans-serif;
     font-weight: 300;
     display: inline;
@@ -78,8 +70,7 @@ body{
     color:rgb(206, 9, 224);
 }
 
-.showDescription
-{
+.showDescription{
     text-align: left;
 }
 
@@ -97,8 +88,7 @@ body{
     z-index: -2;
 }
 
-.my-input
-{
+.my-input{
     margin-left: 1000px;
     width:300px;
     height:30px;

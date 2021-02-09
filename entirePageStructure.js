@@ -6,33 +6,35 @@ export function entirePage(objectFromJson)
 
   const ApiKey="109daa35";
 
-  let searchKey=document.getElementsByClassName("my-input")[0]
+  const content=document.getElementById("entireContent");
+
+  const searchKey=document.getElementsByClassName("my-input")[0]
 
   const showData=objectFromJson['shows'];
   
   function GetMovieInfo(id,e,callback)
-  {
-    let url='http://www.omdbapi.com/?apikey='+ApiKey+'&i='+id;
-  
-    if(movieDetails[id])
     {
-      console.log("faster");
-      callback(id,e);
-      return;
-    }
-
-    // console.log(movieDetails);
+      let url='http://www.omdbapi.com/?apikey='+ApiKey+'&i='+id;
   
-    fetch(url,{
-      method: "GET"
-    })
+      if(movieDetails[id])
+      {
+        console.log("faster");
+        callback(id,e);
+        return;
+      }
+
+
+  
+      fetch(url,{
+        method: "GET"
+      })
       .then(
-        function(response) {
-          if (response.status !== 200) {
-            console.log('Looks like there was a problem. Status Code: ' +
+          function(response) {
+            if (response.status !== 200) {
+              console.log('Looks like there was a problem. Status Code: ' +
               response.status);
             return;
-          }
+            }
   
           // Examine the text in the response
             response.json().then(function(data) {
@@ -45,7 +47,7 @@ export function entirePage(objectFromJson)
       .catch(function(err) {
         console.log('Fetch Error :-S', err);
       });
-    }
+  }
 
   function showTemplate(show) 
   {
@@ -91,7 +93,7 @@ export function entirePage(objectFromJson)
 
     searchKey.classList.add("noShow");
 
-    document.getElementById("entireContent").innerHTML=`
+    content.innerHTML=`
     <ul class="moviePage">
       <li class="titlePageHead">${showTitle}</li>
       <li class="releaseDate">${releaseDate}</li>
@@ -105,22 +107,22 @@ export function entirePage(objectFromJson)
     <button type="button" class="backButton">back</button></p>`;
 
 
-    document.getElementsByClassName('backButton')[0].addEventListener('click',()=>{
+    const backButton=document.getElementsByClassName('backButton')[0];
+    
+    backButton.addEventListener('click',()=>{
       searchKey.classList.remove("noShow");
       pageView.classList.remove("noShow");
-      // entirePage(objectFromJson);
       firstPage();
     });
   }
 
-
   function firstPage()
   {
-    document.getElementById("entireContent").innerHTML=`<ul id="myul" class="flex-container">
+    content.innerHTML=`<ul id="myul" class="movie-list-container flex-container">
     ${showData.map(showTemplate).join("")}
     </ul>`;
 
-    const movieBlock=document.getElementsByClassName("flex-container")[0];
+    const movieBlock=document.getElementsByClassName("movie-list-container")[0];
 
     movieBlock.addEventListener('click',handleClick);
 

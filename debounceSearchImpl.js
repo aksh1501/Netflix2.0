@@ -19,7 +19,7 @@ export let searchImplementation=function(){
                 liElementData[idx].style.display = "none";
             }
         }
-    }
+}
 
 export function debounce(func, wait) {
     let timeout;
@@ -37,4 +37,4 @@ export function debounce(func, wait) {
 
         timeout = setTimeout(later, wait);
     }
-  }
+}
