@@ -67,17 +67,12 @@ export function entirePage(objectFromJson) {
     }
 
     function renderInfoPage(imdbId, trailer) {
+
         const currMovie = movieDetails[imdbId];
 
-        const showTitle = currMovie['Title'];
+        const { Title, Released, Plot, Ratings, Poster } = currMovie;
 
-        const releaseDate = currMovie['Released']
-
-        const description = currMovie['Plot'];
-
-        const rating = currMovie['Ratings'][0].Value;
-
-        const imagePath = currMovie['Poster'];
+        const rating = Ratings[0].Value;
 
         const trailerUrl = "https://www.youtube-nocookie.com/embed/" + trailer;
 
@@ -88,17 +83,19 @@ export function entirePage(objectFromJson) {
         searchKey.classList.add("noShow");
 
         content.innerHTML = `
-    <ul class="moviePage">
-      <li class="titlePageHead">${showTitle}</li>
-      <li class="releaseDate">${releaseDate}</li>
-      <li class="rating">Rating ${rating}</li>
-      <li>
-        <img class="titleImage" src=${imagePath}>
-      </li>
-      <li>${description}</li>
-    </div>
-    <p align="center"><iframe class="trailerVideo" src=${trailerUrl}></iframe>
-    <button type="button" class="backButton">back</button></p>`;
+        <ul class="moviePage">
+            <li class="titlePageHead">${Title}</li>
+            <li class="releaseDate"><strong>Released</strong>${Released}</li>
+             <li class="rating"><strong>Rating</strong>${rating}</li>
+             <li>
+                <img class="titleImage" src=${Poster}>
+            </li>
+            <li>${Plot}</li>
+        </ul>
+        <div>
+            <p align="center"><iframe class="trailerVideo" src=${trailerUrl}></iframe>
+            <button type="button" class="backButton">back</button></p>
+        </div>`;
 
 
         const backButton = document.getElementsByClassName('backButton')[0];

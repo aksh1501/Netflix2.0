@@ -20,17 +20,13 @@ export let searchImplementation = function() {
 
 export function debounce(func, wait) {
     let timeout;
-
     return function debounced() { 
-
         function later() {
             func();
         }
-
         if (timeout) {
             clearInterval(timeout);
         }
-
         timeout = setTimeout(later, wait);
     }
 }
