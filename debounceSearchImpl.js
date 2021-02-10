@@ -20,7 +20,7 @@ export let searchImplementation = function() {
 
 export function debounce(func, wait) {
     let timeout;
-    return function debounced() { 
+    return function debounced() {
         function later() {
             func();
         }

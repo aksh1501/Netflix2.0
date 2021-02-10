@@ -1,4 +1,7 @@
-import { debounce, searchImplementation } from './debounceSearchImpl.js';
+import {
+    debounce,
+    searchImplementation
+} from './debounceSearchImpl.js';
 
 export function entirePage(objectFromJson) {
     let movieDetails = {};
@@ -70,7 +73,13 @@ export function entirePage(objectFromJson) {
 
         const currMovie = movieDetails[imdbId];
 
-        const { Title, Released, Plot, Ratings, Poster } = currMovie;
+        const {
+            Title,
+            Released,
+            Plot,
+            Ratings,
+            Poster
+        } = currMovie;
 
         const rating = Ratings[0].Value;
 
