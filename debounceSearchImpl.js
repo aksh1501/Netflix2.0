@@ -20,13 +20,11 @@ export let searchImplementation = function() {
 
 export function debounce(func, wait) {
     let timeout;
+
     return function debounced() { 
-        let context = this;
-        console.log(this);
-        let args = arguments;
 
         function later() {
-            func.apply(context, args);
+            func();
         }
 
         if (timeout) {
