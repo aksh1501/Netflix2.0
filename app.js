@@ -1,4 +1,6 @@
-import { entirePage } from './entirePageStructure.js';
+import {
+    entirePage
+} from './entirePageStructure.js';
 
 function getJsonData() {
     fetch('https://demo0376970.mockable.io/movieslist', {
